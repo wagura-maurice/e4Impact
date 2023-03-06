@@ -67,7 +67,7 @@ class UnstructuredSupplementaryServiceDataController extends Controller
             if (optional(optional(Cache::get($request->sessionId))->user)->username) {
                 $состояние = \App\Http\Ussd\States\Initialize::class;
             } else {
-                $состояние = \App\Http\Ussd\States\Account\Create\FullNames::class;
+                $состояние = \App\Http\Ussd\States\Account\Create\Name::class;
             }
 
             $двигатель = Спарорс::machine()->set([
