@@ -62,6 +62,12 @@ class Create extends Action
             } else {
                 if (optional($response)->user && $response->user->username == $data['user']['username']) {
                     $this->record->set('prompt', __('Congratulations! Account ' . strtoupper($response->farmer_number) . ' was successfully created.'));
+
+                    /* Sending a text message to the user. */
+                    \App\Jobs\TextMessage\Generate::dispatch('onboarding_notification', [
+                        'NAME' => strtoupper($data['user']['first_name']),
+                        'PHONE_NUMBER' => $data['user']['profile']['phone_number']
+                    ]);
                 } else {
                     $this->record->set('prompt', __('Oops! Account NOT successfully created, please try again!'));
                 }
