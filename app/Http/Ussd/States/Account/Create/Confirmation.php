@@ -19,7 +19,7 @@ class Confirmation extends State
             ->text('LOCATION: ' . ucwords($this->record->get('location') . ', ' . $this->record->get('county') . '.'))
             ->lineBreak(1)
             ->text('ACREAGE: ' . number_format($this->record->get('acreage') ?? 0, 2))
-            ->lineBreak(2)
+            ->lineBreak(1)
             ->listing([
                 __('Continue'),
                 __('Cancel')
