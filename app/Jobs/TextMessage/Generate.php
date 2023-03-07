@@ -65,7 +65,7 @@ class Generate implements ShouldQueue
                 $textMessage = new TextMessage;
                 $textMessage->category_id = $comms->id;
                 $textMessage->content = _parse(__($comms->template), $this->data);
-                $textMessage->telephone = $this->data['phone_number'];
+                $textMessage->telephone = $this->data['PHONE_NUMBER'];
                 $textMessage->save();
             }
 
