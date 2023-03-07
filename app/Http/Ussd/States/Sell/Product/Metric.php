@@ -15,6 +15,7 @@ class Metric extends State
     {
         $this->record->set('quantity', trim($argument));
 
-        $this->decision->numeric(\App\Http\Ussd\States\Sell\Product\Confirmation::class)->any(self::class);
+        $this->decision->numeric(\App\Http\Ussd\States\Sell\Product\Confirmation::class)
+            ->any(self::class);
     }
 }

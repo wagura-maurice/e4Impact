@@ -32,7 +32,7 @@ class Variety extends State
 
             $this->decision
             ->between(1, 3, \App\Http\Ussd\States\Sell\Product\Metric::class)
-            ->equal('4', \App\Http\Ussd\States\Initialize::class)
-            ->any(self::class);
+                ->equal('4', \App\Http\Ussd\States\Initialize::class)
+                ->any(self::class);
     }
 }
