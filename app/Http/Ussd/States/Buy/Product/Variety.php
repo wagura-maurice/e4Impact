@@ -29,9 +29,9 @@ class Variety extends State
             }
 
             $this->decision
-            ->equal('1', \App\Http\Ussd\States\Buy\Product\Metric::class)
-            ->equal('2', \App\Http\Ussd\States\Initialize::class)
-            ->any(self::class);
+                ->equal('1', \App\Http\Ussd\States\Buy\Product\Metric::class)
+                ->equal('2', \App\Http\Ussd\States\Initialize::class)
+                ->any(self::class);
         }
 
         if($this->record->get('category') == 'fertilizer') {
@@ -46,9 +46,9 @@ class Variety extends State
             }
 
             $this->decision
-            ->between(1, 3, \App\Http\Ussd\States\Buy\Product\Metric::class)
-            ->equal('4', \App\Http\Ussd\States\Initialize::class)
-            ->any(self::class);
+                ->between(1, 3, \App\Http\Ussd\States\Buy\Product\Metric::class)
+                ->equal('4', \App\Http\Ussd\States\Initialize::class)
+                ->any(self::class);
         }
     }
 }
