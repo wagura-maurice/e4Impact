@@ -16,8 +16,8 @@ class LNMOController extends Controller
                 'Amount' => (int) $request->amount,
                 'PartyA' => str_replace('+', '', phoneNumberPrefix($request->phone_number)),
                 'PhoneNumber' => str_replace('+', '', phoneNumberPrefix($request->phone_number)),
-                'AccountReference' => $request->order_uuid,
-                'TransactionDesc' => strtoupper('lipa na mpesa online transaction: ' . '\n' .  ' order #; ' . $request->order_uuid . '\n' .  ' date; ' . Carbon::now()->format('YmdHis'))
+                'AccountReference' => $request->order_id,
+                'TransactionDesc' => strtoupper('lipa na mpesa online transaction: ' . '\n' .  ' order #; ' . $request->order_id . '\n' .  ' date; ' . Carbon::now()->format('YmdHis'))
             ]);
 
             return response()->json(array_filter([
