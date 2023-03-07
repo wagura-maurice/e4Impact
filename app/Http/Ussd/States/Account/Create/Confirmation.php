@@ -10,7 +10,7 @@ class Confirmation extends State
     {
         $this->menu->text(__('REGISTRATION DETAILS CONFIRMATION:'))
             ->lineBreak(1)
-            ->text(__('NAME : ' . ucwords($this->record->get('fullName'))))
+            ->text(__('NAME : ' . ucwords($this->record->get('name'))))
             ->lineBreak(1)
             ->text('ID: ' . strtoupper($this->record->get('nationalIdentificationNumber')))
             ->lineBreak(1)
