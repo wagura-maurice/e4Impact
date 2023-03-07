@@ -71,7 +71,7 @@ class LNMORepository implements LNMOInterface
                 $transaction->save();
             }
 
-            return response()->json((array) $response);
+            return $response;
 
         } catch (\Throwable $th) {
             // throw $th;
