@@ -2,9 +2,9 @@
 
 namespace App\Observers;
 
-use App\Models\Booking;
-use App\Models\Invoice;
 use App\Models\Transaction;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class TransactionObserver
 {
@@ -17,20 +17,7 @@ class TransactionObserver
     public function created(Transaction $transaction)
     {
         try {
-            /* Updating the invoice or booking status. */
-            collect(json_decode($transaction->account_reference, true))->map(function ($_reference) use ($transaction) {
-                if ($transaction->transaction_category == Transaction::INVOICE) {
-                    $invoice = Invoice::where('_pid', $_reference)->first();
-                    $invoice->_statement = optional($invoice)->_statement ? collect(array_merge(json_decode($invoice->_statement, true), $transaction->toArray()))->toJson() : $transaction->toJson();
-                    $invoice->_status = Invoice::PROCESSING;
-                    $invoice->save();
-                } elseif ($transaction->transaction_category == Transaction::BOOKING) {
-                    $booking = Booking::where('_pid', $_reference)->first();
-                    $booking->_statement = optional($booking)->_statement ? collect(array_merge(json_decode($booking->_statement, true), $transaction->toArray()))->toJson() : $transaction->toJson();
-                    $booking->_status = Booking::PROCESSING;
-                    $booking->save();
-                } 
-            });
+            // 
         } catch (\Throwable $th) {
             // throw $th;
             eThrowable(get_class($this), $th->getMessage());
@@ -46,24 +33,42 @@ class TransactionObserver
     public function updated(Transaction $transaction)
     {
         try {
-            /* Checking if the transaction code and status has been changed. If it has been changed, it
-            will update the invoice or booking status. */
             if($transaction->wasChanged('transaction_code') && $transaction->wasChanged('_status')) {
-                collect(json_decode($transaction->account_reference, true))->map(function ($_reference) use ($transaction) {
-                    if ($transaction->transaction_category == Transaction::INVOICE) {
-                        $invoice = Invoice::where('_pid', $_reference)->first();
-                        $invoice->paid = $invoice->payable;
-                        $invoice->balance = $invoice->payable - $invoice->paid;
-                        $invoice->_statement = optional($invoice)->_statement ? collect(array_merge(json_decode($invoice->_statement, true), $transaction->toArray()))->toJson() : $transaction->toJson();
-                        $invoice->_status = $invoice->balance < $invoice->payable ? Invoice::SETTLED : Invoice::PARTIAL;
-                        $invoice->save();
-                    } elseif ($transaction->transaction_category == Transaction::BOOKING) {
-                        $booking = Booking::where('_pid', $_reference)->first();
-                        $booking->_statement = optional($booking)->_statement ? collect(array_merge(json_decode($booking->_statement, true), $transaction->toArray()))->toJson() : $transaction->toJson();
-                        $booking->_status = Booking::PROCESSED;
-                        $booking->save();
-                    } 
-                });
+                $curl = curl_init();
+
+                curl_setopt_array($curl, [
+                    CURLOPT_URL => 'https://gizpassion.com/marketplace/checkout/orders/mpesa-webhook/',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => json_encode([
+                        'date' => Carbon::parse($transaction->transaction_timestamp)->toDateTimeString(),
+                        'amount' => (int) $transaction->transaction_amount,
+                        'transaction_code' => $transaction->transaction_code,
+                        'order_id' => $transaction->account_reference
+                    ]),
+                    CURLOPT_HTTPHEADER => [
+                        'Content-Type: application/json'
+                    ]
+                ]);
+
+                $error    = curl_error($curl);
+                $response = json_decode(curl_exec($curl));
+
+                curl_close($curl);
+
+                /* if ($error) {
+                    Log::info('Oops! server error encountered, please try again!');
+                } else {
+                    Log::info('Oops! Order NOT successfully updated, please try again!');
+                    Log::info(print_r($response->all(), true));
+
+                    dd($response->all());
+                } */
             }
         } catch (\Throwable $th) {
             // throw $th;
