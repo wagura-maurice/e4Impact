@@ -9,14 +9,14 @@ class Create extends Action
     public function run(): string
     {
         try {
-            $name = $this->record->get('fullName') ? optional(explode(' ', $this->record->get('fullName'))) : NULL;
+            $name = $this->record->get('name') ? optional(explode(' ', $this->record->get('name'))) : NULL;
 
             $data['user'] = [
                     'first_name' => optional($name)[0] ?? NULL,
-                    // 'email' => optional($name)[0] . '@gizpassion.impact',
+                    'email' => optional($name)[0] . '@gizpassion.impact', // to be removed
                     'last_name' => optional($name)[1] ?? NULL,
                     'username' => $this->record->get('nationalIdentificationNumber') ?? NULL,
-                    // 'password' => 'Qwerty123!',
+                    'password' => 'Qwerty123!', // to be removed
                     'profile' => [
                         'address' => $this->record->get('county') ?? NULL,
                         'phone_number' => $this->record->get('phoneNumber'),
@@ -32,7 +32,7 @@ class Create extends Action
             $data['postal_address'] = $this->record->get('county') ?? NULL;
             $data['acreage'] = $this->record->get('acreage') ?? NULL;
             $data['enumerator_number'] = $this->record->get('enumerator');
-            // $data['farmer_number'] = explode('-', generateUUID())[0];
+            $data['farmer_number'] = explode('-', generateUUID())[0]; // to be removed
             $data['landmark'] = $this->record->get('landmark') ?? NULL;
 
             $curl = curl_init();
