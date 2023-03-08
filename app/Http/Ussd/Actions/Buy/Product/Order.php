@@ -41,8 +41,8 @@ class Order extends Action
             if ($error) {
                 $this->record->set('prompt', __('Oops! server error encountered, please try again!'));
             } else {
-                if (optional($response)->order_id) {
-                    $this->record->set('prompt', __('Congratulations! Order ' . strtoupper($response->order_id) . ' was successfully created.'));
+                if (optional($response)->id) {
+                    $this->record->set('prompt', __('Congratulations! Order ' . strtoupper($response->id) . ' was successfully created.'));
                 } else {
                     $this->record->set('prompt', __('Oops! Order NOT successfully created, please try again!'));
                 }
