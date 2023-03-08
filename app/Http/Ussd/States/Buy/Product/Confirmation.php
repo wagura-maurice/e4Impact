@@ -12,7 +12,7 @@ class Confirmation extends State
             ->lineBreak(1)
             ->text(__('CATEGORY : ' . ucwords($this->record->get('category'))))
             ->lineBreak(1)
-            ->text('VARIETY: ' . strtoupper($this->record->get('variety')))
+            ->text('VARIETY: ' . ucwords($this->record->get('variety')))
             ->lineBreak(1)
             ->text('KG: ' . $this->record->get('quantity'))
             ->lineBreak(1)
