@@ -19,8 +19,12 @@ class County extends State
             $this->record->set('county', strtolower($county->name));
         }
 
-        $this->decision->custom(function ($input) use ($county) {
+        /* $this->decision->custom(function ($input) use ($county) {
             return is_string(trim($input)) && !empty(trim($input)) && optional($county)->id ? true : false;
+        }, \App\Http\Ussd\States\Account\Create\Location::class)->any(self::class); */
+
+        $this->decision->custom(function ($input) {
+            return /* is_string(trim($input)) && */ !empty(trim($input)) ? true : false;
         }, \App\Http\Ussd\States\Account\Create\Location::class)->any(self::class);
     }
 }
