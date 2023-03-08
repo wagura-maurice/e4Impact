@@ -22,11 +22,11 @@ class Variety extends State
     {
             if ($argument != '4') {
                 if ($argument == '1') {
-                    $this->record->set('variety', 'Grade 1');
+                    $this->record->set('variety', 'grade1');
                 } elseif ($argument == '2') {
-                    $this->record->set('variety', 'Grade 2');
+                    $this->record->set('variety', 'grade2');
                 } elseif ($argument == '3') {
-                    $this->record->set('variety', 'Grade 3');
+                    $this->record->set('variety', 'grade3');
                 }
             }
 

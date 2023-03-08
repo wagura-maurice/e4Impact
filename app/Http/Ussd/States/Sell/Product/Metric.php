@@ -8,7 +8,7 @@ class Metric extends State
 {
     protected function beforeRendering(): void
     {
-        $this->menu->text($this->record->get('quantity') ? __('Sorry, that answer was not valid. How many kilograms of ' . $this->record->get('variety') . ' do you what? (e.g. 0.5)') : __('How many kilograms of ' . $this->record->get('variety') . ' do you what? (e.g. 0.5)'));
+        $this->menu->text($this->record->get('quantity') ? __('Sorry, that answer was not valid. How many kilograms of ' . ucwords($this->record->get('variety')) . ' are you selling? (e.g. 0.5)') : __('How many kilograms of ' . $this->record->get('variety') . ' are you selling? (e.g. 0.5)'));
     }
 
     protected function afterRendering(string $argument): void
