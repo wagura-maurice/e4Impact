@@ -25,7 +25,7 @@ class Variety extends State
     {
         if($this->record->get('category') == 'seedlings') {
             if ($argument != '2') {
-                $this->record->set('variety', 'KP4');
+                $this->record->set('variety', 'kp4');
             }
 
             $this->decision
@@ -37,11 +37,11 @@ class Variety extends State
         if($this->record->get('category') == 'fertilizer') {
             if ($argument != '4') {
                 if ($argument == '1') {
-                    $this->record->set('variety', 'DAP');
+                    $this->record->set('variety', 'dap');
                 } elseif ($argument == '2') {
-                    $this->record->set('variety', 'CAN');
+                    $this->record->set('variety', 'can');
                 } elseif ($argument == '3') {
-                    $this->record->set('variety', 'NPK');
+                    $this->record->set('variety', 'npk');
                 }
             }
 

@@ -15,7 +15,7 @@ class Confirmation extends State
             ->text('VARIETY: ' . strtoupper($this->record->get('variety')))
             ->lineBreak(1)
             ->text('KG: ' . $this->record->get('quantity'))
-            ->lineBreak(2)
+            ->lineBreak(1)
             ->listing([
                 __('Continue'),
                 __('Cancel')
