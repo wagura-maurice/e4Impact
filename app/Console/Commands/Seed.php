@@ -42,7 +42,7 @@ class Seed extends Command
             // logic for looping database tables though Orange hill's iseed commands.
             Artisan::call('iseed settings --force');
             // optional
-            Artisan::call('iseed communication_categories --force');
+            Artisan::call('iseed communication_categories,counties --force');
 
             return Command::SUCCESS;
         } catch (\Throwable $th) {
