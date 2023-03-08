@@ -13,7 +13,7 @@ class Village extends State
 
     protected function afterRendering(string $argument): void
     {
-        $this->record->set('village', strtoupper(trim($argument)));
+        $this->record->set('village', strtolower(trim($argument)));
 
         $this->decision->custom(function ($input) {
             return is_string(trim($input)) && !empty(trim($input)) ? true : false;

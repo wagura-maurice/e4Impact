@@ -13,7 +13,7 @@ class YearOfBirth extends State
 
     protected function afterRendering(string $argument): void
     {
-        $this->record->set('yearOfBirth', strtoupper(trim($argument)));
+        $this->record->set('yearOfBirth', trim($argument));
 
         $this->decision->custom(function ($input) {
             return is_string(trim($input)) && !empty(trim($input)) /* && isValidYear($input) */ ? true : false;

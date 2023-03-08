@@ -13,7 +13,7 @@ class Location extends State
 
     protected function afterRendering(string $argument): void
     {
-        $this->record->set('location', strtoupper(trim($argument)));
+        $this->record->set('location', strtolower(trim($argument)));
 
         $this->decision->custom(function ($input) {
             return is_string(trim($input)) && !empty(trim($input)) ? true : false;

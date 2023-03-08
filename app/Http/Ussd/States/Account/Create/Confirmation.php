@@ -16,7 +16,7 @@ class Confirmation extends State
             ->lineBreak(1)
             ->text('YOB: ' . $this->record->get('yearOfBirth'))
             ->lineBreak(1)
-            ->text('LOCATION: ' . ucwords($this->record->get('location') . ', ' . $this->record->get('county') . '.'))
+            ->text('LOCATION: ' . ucwords($this->record->get('location') . ', ' . $this->record->get('county')))
             ->lineBreak(1)
             ->text('ACREAGE: ' . number_format($this->record->get('acreage') ?? 0, 2))
             ->lineBreak(1)

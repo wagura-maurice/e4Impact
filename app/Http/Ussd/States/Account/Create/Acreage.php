@@ -14,7 +14,7 @@ class Acreage extends State
     protected function afterRendering(string $argument): void
     {
         if ($argument != '0') {
-            $this->record->set('acreage', strtoupper(trim($argument)));
+            $this->record->set('acreage', trim($argument));
         }
 
         $this->decision->numeric(\App\Http\Ussd\States\Account\Create\Organization::class)->any(self::class);
