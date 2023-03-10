@@ -19,12 +19,12 @@ class Create extends Action
                         'phone_number' => $this->record->get('phoneNumber'),
                         'year_of_birth' => $this->record->get('yearOfBirth') ?? NULL,
                         'gender' => $this->record->get('gender') ?? NULL,
-                        'county' => $this->record->get('county') ?? NULL
+                        'county' => $this->record->get('county') ?? 2
                     ]
             ];
 
             $data['sub_county'] = $this->record->get('location') ?? NULL;
-            $data['county_number'] = $this->record->get('county_number') ?? NULL;
+            $data['county_number'] = $this->record->get('county_number') ?? 2;
             $data['acreage'] = $this->record->get('acreage') ?? NULL;
             $data['enumerator_code'] = $this->record->get('enumerator') ?? NULL;
             $data['selling_place'] = $this->record->get('landmark') ?? NULL;
