@@ -11,24 +11,24 @@ if (! function_exists('getCounty')) {
      * 
      * @return object A county object
      */
-    function getCounty(string $data, string $method): object
+    function getCounty(string $data, string $method = NULL): object
     {
         try {
             if(is_numeric($data)) {
-                $county = County::where('code', (int) $data)
+                $county = County::where('code', (int) ltrim($data, "0"))
                     ->first();
             } else {
                 $county = County::where('name', 'LIKE', '%' . strtolower($data) . '%')
-                    ->OrWhere('headquarter', 'LIKE', '%' . strtolower($data) . '%')
-                    ->OrWhere('abbreviation', 'LIKE', '%' . strtolower($data) . '%')
+                    // ->OrWhere('headquarter', 'LIKE', '%' . strtolower($data) . '%')
+                    // ->OrWhere('abbreviation', 'LIKE', '%' . strtolower($data) . '%')
                     ->first();
             }
 
             return $county;
 
         } catch (\Throwable $th) {
-            // throw $th;
-            eThrowable($method, $th->getMessage());
+            throw $th;
+            // eThrowable($method, $th->getMessage());
         }
     }
 }
