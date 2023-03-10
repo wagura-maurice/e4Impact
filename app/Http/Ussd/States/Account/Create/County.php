@@ -21,9 +21,7 @@ class County extends State
         }
 
         $this->decision->custom(function ($input) {
-            return (is_string(trim($input)) || is_numeric(trim($input))) && !empty(trim($input)) ? true : false;
+            return is_numeric(trim($input)) && !empty(trim($input)) ? true : false;
         }, \App\Http\Ussd\States\Account\Create\Location::class)->any(self::class);
-
-        $this->decision->numeric(\App\Http\Ussd\States\Account\Create\Organization::class)->any(self::class);
     }
 }
