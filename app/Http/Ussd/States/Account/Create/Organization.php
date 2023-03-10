@@ -8,7 +8,7 @@ class Organization extends State
 {
     protected function beforeRendering(): void
     {
-        $this->menu->text($this->record->get('organization') ? __('Input entered is not valid! Please enter your organization code, else enter 0 to continue.') : __('Please enter your organization code, else enter 0 to continue.'));
+        $this->menu->text($this->record->get('organization') ? __('Input entered is not valid! Please enter your farmer group/co-operative code, else enter 0 to continue.') : __('Please enter your farmer group/co-operative code, else enter 0 to continue.'));
     }
 
     protected function afterRendering(string $argument): void

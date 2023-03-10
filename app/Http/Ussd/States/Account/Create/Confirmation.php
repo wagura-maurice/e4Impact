@@ -12,13 +12,11 @@ class Confirmation extends State
             ->lineBreak(1)
             ->text(__('NAME : ' . ucwords($this->record->get('name'))))
             ->lineBreak(1)
-            ->text('ID: ' . strtoupper($this->record->get('nationalIdentificationNumber')))
-            ->lineBreak(1)
-            ->text('YOB: ' . $this->record->get('yearOfBirth'))
-            ->lineBreak(1)
-            ->text('LOCATION: ' . ucwords($this->record->get('location') . ', ' . $this->record->get('county')))
+            ->text('PHONE NUMBER: ' . strtoupper($this->record->get('phoneNumber')))
             ->lineBreak(1)
             ->text('ACREAGE: ' . number_format($this->record->get('acreage') ?? 0, 2))
+            ->lineBreak(1)
+            ->text('SELLING POINT: ' . ucwords($this->record->get('landmark') . ', ' . $this->record->get('county')))
             ->lineBreak(1)
             ->listing([
                 __('Continue'),
