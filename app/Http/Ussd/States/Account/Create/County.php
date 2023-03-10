@@ -19,12 +19,6 @@ class County extends State
             $this->record->set('county', strtolower($county->name));
         }
 
-        if(is_numeric(trim($argument))) {
-            // 
-        } else {
-            // 
-        }
-
         $this->decision->custom(function ($input) {
             return (is_string(trim($input)) || is_numeric(trim($input))) && !empty(trim($input)) ? true : false;
         }, \App\Http\Ussd\States\Account\Create\Location::class)->any(self::class);
