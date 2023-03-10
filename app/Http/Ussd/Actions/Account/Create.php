@@ -13,26 +13,23 @@ class Create extends Action
 
             $data['user'] = [
                     'first_name' => optional($name)[0] ?? NULL,
-                    'email' => optional($name)[0] . '@gizpassion.impact', // to be removed
                     'last_name' => optional($name)[1] ?? NULL,
-                    'username' => $this->record->get('nationalIdentificationNumber') ?? NULL,
-                    'password' => 'Qwerty123!', // to be removed
+                    'username' => substr($this->record->get('phoneNumber'), -9) ?? NULL,
                     'profile' => [
-                        'address' => $this->record->get('county') ?? NULL,
                         'phone_number' => $this->record->get('phoneNumber'),
                         'year_of_birth' => $this->record->get('yearOfBirth') ?? NULL,
                         'gender' => $this->record->get('gender') ?? NULL,
-                        'county_number' => 2,
-                        'id_number' => $this->record->get('nationalIdentificationNumber') ?? NULL
+                        'county' => $this->record->get('county') ?? NULL
                     ]
             ];
 
-            $data['county'] = $this->record->get('county') ?? NULL;
-            $data['county_number'] = 2;
-            $data['postal_address'] = $this->record->get('county') ?? NULL;
+            $data['sub_county'] = $this->record->get('location') ?? NULL;
+            $data['county_number'] = $this->record->get('county_number') ?? NULL;
             $data['acreage'] = $this->record->get('acreage') ?? NULL;
-            $data['enumerator_number'] = $this->record->get('enumerator');
-            $data['farmer_number'] = explode('-', generateUUID())[0]; // to be removed
+            $data['enumerator_code'] = $this->record->get('enumerator') ?? NULL;
+            $data['selling_place'] = $this->record->get('landmark') ?? NULL;
+            $data['farmer_group_code'] = $this->record->get('organization') ?? NULL;
+            $data['farmer_number'] = NULL; // explode('-', generateUUID())[0]; // to be removed
             $data['landmark'] = $this->record->get('landmark') ?? NULL;
 
             $curl = curl_init();
