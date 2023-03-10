@@ -58,7 +58,7 @@ class Create extends Action
                 $this->record->set('prompt', __('Oops! server error encountered, please try again!'));
             } else {
                 if (optional($response)->user && $response->user->username == $data['user']['username']) {
-                    $this->record->set('prompt', __('Congratulations! Account ' . strtoupper($response->farmer_number) . ' was successfully created.'));
+                    $this->record->set('prompt', __('Congratulations! Account ' . strtoupper($response->user->username) . ' was successfully created.'));
 
                     /* Sending a text message to the user. */
                     \App\Jobs\TextMessage\Generate::dispatch('onboarding_notification', [
