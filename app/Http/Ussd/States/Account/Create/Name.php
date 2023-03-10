@@ -19,6 +19,6 @@ class Name extends State
         
         $this->decision->custom(function ($input) {
             return is_string(trim($input)) && !empty(trim($input)) && preg_match('/^[a-zA-Z]+(?:\s[a-zA-Z]+)+$/', trim($input)) ? true : false;
-        }, \App\Http\Ussd\States\Account\Create\NationalIdentificationNumber::class)->any(self::class);
+        }, \App\Http\Ussd\States\Account\Create\YearOfBirth::class)->any(self::class);
     }
 }
