@@ -8,7 +8,7 @@ class Landmark extends State
 {
     protected function beforeRendering(): void
     {
-        $this->menu->text($this->record->get('landmark') ? __('Input entered is not valid! Please enter your nearest school to continue.') : __('Please enter your nearest school to continue.'));
+        $this->menu->text($this->record->get('landmark') ? __('Input entered is not valid! Please enter your selling point to continue.') : __('Please enter your selling point to continue.'));
     }
 
     protected function afterRendering(string $argument): void

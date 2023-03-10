@@ -16,7 +16,8 @@ class County extends State
         $county = getCounty(trim($argument));
 
         if (optional($county)->id) {
-            $this->record->set('county', strtolower($county->name));
+            $this->record->set('county', strtolower($county->code));
+            $this->record->set('county_number', strtolower($county->code));
         }
 
         $this->decision->custom(function ($input) {
