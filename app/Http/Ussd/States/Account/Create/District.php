@@ -4,7 +4,7 @@ namespace App\Http\Ussd\States\Account\Create;
 
 use Sparors\Ussd\State;
 
-class County extends State
+class District extends State
 {
     protected function beforeRendering(): void
     {
