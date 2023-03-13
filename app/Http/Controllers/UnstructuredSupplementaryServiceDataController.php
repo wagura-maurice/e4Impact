@@ -74,43 +74,35 @@ class UnstructuredSupplementaryServiceDataController extends Controller
                 
                 return optional($response)[0] ?? false;
             });
-            
-            if (optional(optional(Cache::get(phoneNumberPrefix($request->phoneNumber)))->user)->username) {
-                $состояние = \App\Http\Ussd\States\Initialize::class;
-            } else {
-                $состояние = \App\Http\Ussd\States\Account\Create\Name::class;
-            }
 
-            $двигатель = Спарорс::machine()->set([
-                'sessionId' => $request->sessionId,
-                'phoneNumber' => phoneNumberPrefix($request->phoneNumber),
-                'networkCode' => $request->networkCode,
-                'network' => $request->serviceCode,
-            ])
-            ->setInput(
-                strpos(request('text'), '*') !== false ?
-                substr(request('text'), strrpos(request('text'), '*') + 1) :
-                request('text')
-            )
-            ->setInitialState($состояние)
-            ->setResponse(function (string $message, string $action) {
-                switch ($action) {
-                    case 'prompt':
-                        return "END $message";
-                        break;
+            $состояние = optional(optional(Cache::get(phoneNumberPrefix($request->phoneNumber)))->user)->username ? \App\Http\Ussd\States\Initialize::class : \App\Http\Ussd\States\Account\Create\Name::class;
 
-                    default:
-                        return "CON $message";
-                        break;
-                }
-            });
+            return Спарорс::machine()
+                ->set([
+                    'sessionId' => $request->sessionId,
+                    'phoneNumber' => phoneNumberPrefix($request->phoneNumber),
+                    'networkCode' => $request->networkCode,
+                    'network' => $request->serviceCode
+                ])
+                // ->setInput(strpos(request('text'), '*') !== false ? substr(request('text'), strrpos(request('text'), '*') + 1) : request('text'))
+                ->setInput(strpos($request->text, '*') !== false ? substr($request->text, strrpos($request->text, '*') + 1) : ($request->text ? $request->text : 0))
+                ->setInitialState($состояние)
+                ->setResponse(function (string $message, string $action) {
+                    switch ($action) {
+                        case 'prompt':
+                            return "END $message";
+                            break;
+
+                        default:
+                            return "CON $message";
+                            break;
+                    }
+                })
+                ->run();
         } catch (\Throwable $th) {
             // throw $th;
-            dd($th->getMessage());
-            // eThrowable(get_class($this), $th->getMessage());
+            eThrowable(get_class($this), $th->getMessage());
         }
-
-        return isset($двигатель) && !empty($двигатель) ? $двигатель->run() : false;
     }
 
     /**
