@@ -16,12 +16,11 @@ class UnstructuredSupplementaryServiceData extends Model
      * @var array
      */
     protected $fillable = [
-        '_pid',
-        'telephone',
-        'short_code',
-        'network',
-        'transaction_amount',
-        '_status'
+        'sessionId',
+        'phoneNumber',
+        'serviceCode',
+        'networkCode',
+        'cost'
     ];
 
     /**
@@ -32,12 +31,11 @@ class UnstructuredSupplementaryServiceData extends Model
     public static function createRules()
     {
         return [
-            '_pid' => 'required|string|unique:unstructured_supplementary_service_data',
-            'telephone' => 'required|string',
-            'short_code' => 'required|string',
-            'network' => 'nullable|string',
-            'transaction_amount' => 'nullable|numeric',
-            '_status' => 'nullable|string'
+            'sessionId' => 'required|string|unique:unstructured_supplementary_service_data',
+            'phoneNumber' => 'required|string',
+            'serviceCode' => 'required|string',
+            'networkCode' => 'nullable|string',
+            'cost' => 'nullable|string'
         ];
     }
 
@@ -51,12 +49,11 @@ class UnstructuredSupplementaryServiceData extends Model
     public static function updateRules(int $id)
     {
         return [
-            '_pid' => 'nullable|string|'.Rule::unique('unstructured_supplementary_service_data', '_pid')->ignore($id),
-            'telephone' => 'nullable|string',
-            'short_code' => 'nullable|string',
-            'network' => 'nullable|string',
-            'transaction_amount' => 'nullable|numeric',
-            '_status' => 'nullable|string'
+            'sessionId' => 'nullable|string|'.Rule::unique('unstructured_supplementary_service_data', 'sessionId')->ignore($id),
+            'phoneNumber' => 'nullable|string',
+            'serviceCode' => 'nullable|string',
+            'networkCode' => 'nullable|string',
+            'cost' => 'nullable|string'
         ];
     }
 }
