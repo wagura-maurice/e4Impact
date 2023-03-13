@@ -49,7 +49,7 @@ class UnstructuredSupplementaryServiceDataController extends Controller
 
             $LOG->save();
 
-            Cache::remember($request->sessionId, 444, function () use ($request) {
+            Cache::remember($request->phoneNumber, 444, function () use ($request) {
                 $curl = curl_init();
 
                 curl_setopt_array($curl, [
@@ -75,7 +75,7 @@ class UnstructuredSupplementaryServiceDataController extends Controller
                 return optional($response)[0] ?? false;
             });
             
-            if (optional(optional(Cache::get($request->sessionId))->user)->username) {
+            if (optional(optional(Cache::get($request->phoneNumber))->user)->username) {
                 $состояние = \App\Http\Ussd\States\Initialize::class;
             } else {
                 $состояние = \App\Http\Ussd\States\Account\Create\Name::class;
