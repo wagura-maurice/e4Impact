@@ -13,7 +13,7 @@ class District extends State
 
     protected function afterRendering($argument): void
     {
-        $county = getCounty(trim($argument));
+        $county = getCounty((string) trim($argument));
 
         if (optional($county)->id) {
             $this->record->set('county', strtolower($county->code));
