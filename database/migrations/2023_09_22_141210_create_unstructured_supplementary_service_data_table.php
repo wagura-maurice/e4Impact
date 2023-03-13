@@ -16,12 +16,11 @@ class CreateUnstructuredSupplementaryServiceDataTable extends Migration
     {
         Schema::create('unstructured_supplementary_service_data', function (Blueprint $table) {
             $table->id();
-            $table->string('_pid'); // ->unique();
-            $table->string('telephone');
-            $table->string('short_code');
-            $table->string('network')->nullable();
-            $table->decimal('transaction_amount', 10, 2)->nullable();
-            $table->string('_status')->nullable();
+            $table->string('sessionId'); // ->unique();
+            $table->string('phoneNumber');
+            $table->string('serviceCode');
+            $table->string('networkCode')->nullable();
+            $table->decimal('cost', 10, 2)->nullable();
             $table->timestamps();
         });
     }
