@@ -84,8 +84,8 @@ class UnstructuredSupplementaryServiceDataController extends Controller
                     'networkCode' => $request->networkCode,
                     'network' => $request->serviceCode
                 ])
-                ->setInput(strpos(request('text'), '*') !== false ? substr(request('text'), strrpos(request('text'), '*') + 1) : request('text'))
-                // ->setInput(strpos($request->text, '*') !== false ? substr($request->text, strrpos($request->text, '*') + 1) : ($request->text ? $request->text : 0))
+                // ->setInput(strpos(request('text'), '*') !== false ? substr(request('text'), strrpos(request('text'), '*') + 1) : request('text'))
+                ->setInput(strpos($request->text, '*') !== false ? substr($request->text, strrpos($request->text, '*') + 1) : ($request->text ? $request->text : 0))
                 ->setInitialState($состояние)
                 ->setResponse(function (string $message, string $action) {
                     switch ($action) {
