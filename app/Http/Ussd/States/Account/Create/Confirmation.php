@@ -16,7 +16,7 @@ class Confirmation extends State
             ->lineBreak(1)
             ->text('ACREAGE: ' . number_format($this->record->get('acreage') ?? 0, 2))
             ->lineBreak(1)
-            ->text('SELLING POINT: ' . ucwords($this->record->get('landmark') . ', ' . $this->record->get('county')))
+            ->text('SELLING POINT: ' . ucwords($this->record->get('landmark') . ', ' . $this->record->get('village')))
             ->lineBreak(1)
             ->listing([
                 __('Continue'),
