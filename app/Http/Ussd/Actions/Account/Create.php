@@ -3,6 +3,7 @@
 namespace App\Http\Ussd\Actions\Account;
 
 use Sparors\Ussd\Action;
+use Illuminate\Support\Facades\Cache;
 
 class Create extends Action
 {
@@ -68,6 +69,8 @@ class Create extends Action
                 } else {
                     $this->record->set('prompt', __('Oops! Account NOT successfully created, please try again!'));
                 }
+
+                Cache::forget($this->record->get('sessionId'));
             }
         } catch (\Throwable $th) {
             // throw $th;
