@@ -11,7 +11,7 @@ class District extends State
         $this->menu->text($this->record->get('county') ? __('Input entered is not valid! Please enter your county name or code to continue.') : __('Please enter your county name or code to continue.'));
     }
 
-    protected function afterRendering(string $argument): void
+    protected function afterRendering($argument): void
     {
         $county = getCounty(trim($argument));
 
