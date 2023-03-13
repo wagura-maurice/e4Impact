@@ -25,7 +25,7 @@ class Gender extends State
         }
 
         $this->decision
-            ->between(1, 2, \App\Http\Ussd\States\Account\Create\Location::class)
+            ->between(1, 2, \App\Http\Ussd\States\Account\Create\County::class)
             ->any(self::class);
     }
 }

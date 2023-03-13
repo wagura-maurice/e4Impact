@@ -4,16 +4,16 @@ namespace App\Http\Ussd\States\Account\Create;
 
 use Sparors\Ussd\State;
 
-class District extends State
+class County extends State
 {
     protected function beforeRendering(): void
     {
         $this->menu->text($this->record->get('county') ? __('Input entered is not valid! Please enter your county name or code to continue.') : __('Please enter your county name or code to continue.'));
     }
 
-    protected function afterRendering($argument): void
+    protected function afterRendering(string $argument): void
     {
-        $county = getCounty((string) trim($argument));
+        $county = getCounty(trim($argument));
 
         if (optional($county)->id) {
             $this->record->set('county', strtolower($county->code));
