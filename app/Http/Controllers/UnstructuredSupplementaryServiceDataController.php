@@ -39,7 +39,7 @@ class UnstructuredSupplementaryServiceDataController extends Controller
     {
         try {
 
-            $LOG = new UnstructuredSupplementaryServiceData;
+            /* $LOG = new UnstructuredSupplementaryServiceData;
 
             $LOG->sessionId = $request->sessionId;
             $LOG->phoneNumber = phoneNumberPrefix($request->phoneNumber);
@@ -47,7 +47,7 @@ class UnstructuredSupplementaryServiceDataController extends Controller
             $LOG->networkCode = $request->networkCode;
             $LOG->cost = isset($request->cost) && !empty($request->cost) ? getOnlyNumbers($request->cost) : NULL;
 
-            $LOG->save();
+            $LOG->save(); */
 
             Cache::remember(phoneNumberPrefix($request->phoneNumber), 444, function () use ($request) {
                 $curl = curl_init();
@@ -75,7 +75,7 @@ class UnstructuredSupplementaryServiceDataController extends Controller
                 return optional($response)[0] ?? false;
             });
 
-            $состояние = optional(optional(Cache::get(phoneNumberPrefix($request->phoneNumber)))->user)->username ? \App\Http\Ussd\States\Initialize::class : \App\Http\Ussd\States\Account\Create\Name::class;
+            $состояние = /* optional(optional(Cache::get(phoneNumberPrefix($request->phoneNumber)))->user)->username ? \App\Http\Ussd\States\Initialize::class :  */\App\Http\Ussd\States\Account\Create\Name::class;
 
             return Спарорс::machine()
                 ->set([
@@ -84,8 +84,8 @@ class UnstructuredSupplementaryServiceDataController extends Controller
                     'networkCode' => $request->networkCode,
                     'network' => $request->serviceCode
                 ])
-                // ->setInput(strpos(request('text'), '*') !== false ? substr(request('text'), strrpos(request('text'), '*') + 1) : request('text'))
-                ->setInput(strpos($request->text, '*') !== false ? substr($request->text, strrpos($request->text, '*') + 1) : ($request->text ? $request->text : 0))
+                ->setInput(strpos(request('text'), '*') !== false ? substr(request('text'), strrpos(request('text'), '*') + 1) : request('text'))
+                // ->setInput(strpos($request->text, '*') !== false ? substr($request->text, strrpos($request->text, '*') + 1) : ($request->text ? $request->text : 0))
                 ->setInitialState($состояние)
                 ->setResponse(function (string $message, string $action) {
                     switch ($action) {
