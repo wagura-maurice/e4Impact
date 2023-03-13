@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
 use Sparors\Ussd\Facades\Ussd as Спарорс;
 use App\Models\UnstructuredSupplementaryServiceData;
@@ -38,17 +37,15 @@ class UnstructuredSupplementaryServiceDataController extends Controller
      */
     public function store(Request $request)
     {
-        // try {
+        try {
+            
+            $LOG = new UnstructuredSupplementaryServiceData;
 
-            // dd($request->all());
-
-            Log::info(print_r($request->all(), true));
-
-            /* $LOG = new UnstructuredSupplementaryServiceData;
-            $LOG->_pid = $request->sessionId;
-            $LOG->telephone = phoneNumberPrefix($request->phoneNumber);
-            $LOG->short_code = $request->networkCode;
-            $LOG->network = $request->serviceCode;
+            $LOG->sessionId = $request->sessionId;
+            $LOG->phoneNumber = phoneNumberPrefix($request->phoneNumber);
+            $LOG->serviceCode = $request->serviceCode;
+            $LOG->networkCode = $request->networkCode;
+            $LOG->cost = $request->cost;
 
             $LOG->save();
 
@@ -112,7 +109,7 @@ class UnstructuredSupplementaryServiceDataController extends Controller
             // eThrowable(get_class($this), $th->getMessage());
         }
 
-        return isset($двигатель) && !empty($двигатель) ? $двигатель->run() : false; */
+        return isset($двигатель) && !empty($двигатель) ? $двигатель->run() : false;
     }
 
     /**
