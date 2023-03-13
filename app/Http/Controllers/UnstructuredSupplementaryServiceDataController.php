@@ -38,7 +38,15 @@ class UnstructuredSupplementaryServiceDataController extends Controller
     public function store(Request $request)
     {
         try {
-            Cache::remember($request->sessionId, 440, function () use ($request) {
+            $LOG = new UnstructuredSupplementaryServiceData;
+            $LOG->_pid = $request->sessionId;
+            $LOG->telephone = phoneNumberPrefix($request->phoneNumber);
+            $LOG->short_code = $request->networkCode;
+            $LOG->network = $request->serviceCode;
+
+            $LOG->save();
+
+            Cache::remember($request->sessionId, 444, function () use ($request) {
                 $curl = curl_init();
 
                 curl_setopt_array($curl, [
