@@ -19,7 +19,7 @@ class Create extends Action
                         'phone_number' => $this->record->get('phoneNumber'),
                         'year_of_birth' => $this->record->get('yearOfBirth') ?? NULL,
                         'gender' => $this->record->get('gender') ?? NULL,
-                        'county' => $this->record->get('county') ?? 2
+                        'county' => $this->record->get('county_number') ?? NULL
                     ]
             ];
 
