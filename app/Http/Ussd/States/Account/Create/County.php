@@ -13,12 +13,14 @@ class County extends State
 
     protected function afterRendering(string $argument): void
     {
-        $county = getCounty(trim($argument));
+        /* $county = getCounty(trim($argument));
 
         if (optional($county)->id) {
             $this->record->set('county', strtolower($county->code));
             $this->record->set('county_number', strtolower($county->code));
-        }
+        } */
+
+        $this->record->set('county', strtolower(trim($argument)));
 
         $this->decision->custom(function ($input) {
             return !empty(trim($input)) ? true : false;
