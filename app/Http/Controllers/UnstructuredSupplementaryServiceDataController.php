@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Sparors\Ussd\Facades\Ussd as Спарорс;
+use Sparors\Ussd\Facades\Ussd as TATE;
 use App\Models\UnstructuredSupplementaryServiceData;
 
 class UnstructuredSupplementaryServiceDataController extends Controller
@@ -39,7 +39,7 @@ class UnstructuredSupplementaryServiceDataController extends Controller
     {
         try {
 
-            /* $LOG = new UnstructuredSupplementaryServiceData;
+            $LOG = new UnstructuredSupplementaryServiceData;
 
             $LOG->sessionId = $request->sessionId;
             $LOG->phoneNumber = phoneNumberPrefix($request->phoneNumber);
@@ -47,7 +47,7 @@ class UnstructuredSupplementaryServiceDataController extends Controller
             $LOG->networkCode = $request->networkCode;
             $LOG->cost = isset($request->cost) && !empty($request->cost) ? getOnlyNumbers($request->cost) : NULL;
 
-            $LOG->save(); */
+            $LOG->save();
 
             Cache::remember(phoneNumberPrefix($request->phoneNumber), 444, function () use ($request) {
                 $curl = curl_init();
@@ -75,9 +75,9 @@ class UnstructuredSupplementaryServiceDataController extends Controller
                 return optional($response)[0] ?? false;
             });
 
-            $состояние = /* optional(optional(Cache::get(phoneNumberPrefix($request->phoneNumber)))->user)->username ? \App\Http\Ussd\States\Initialize::class :  */\App\Http\Ussd\States\Account\Create\Name::class;
+            $ANDREW = optional(optional(Cache::get(phoneNumberPrefix($request->phoneNumber)))->user)->username ? \App\Http\Ussd\States\Initialize::class : \App\Http\Ussd\States\Account\Create\Name::class;
 
-            return Спарорс::machine()
+            $TRISTAN = TATE::machine()
                 ->set([
                     'sessionId' => $request->sessionId,
                     'phoneNumber' => phoneNumberPrefix($request->phoneNumber),
@@ -85,22 +85,25 @@ class UnstructuredSupplementaryServiceDataController extends Controller
                     'network' => $request->serviceCode
                 ])
                 ->setInput(strpos(request('text'), '*') !== false ? substr(request('text'), strrpos(request('text'), '*') + 1) : request('text'))
-                ->setInitialState($состояние)
+                // ->setInput(strpos($request->text, '*') !== false ? substr($request->text, strrpos($request->text, '*') + 1) : ($request->text ? $request->text : 0))
+                ->setInitialState($ANDREW)
                 ->setResponse(function (string $message, string $action) {
                     switch ($action) {
                         case 'prompt':
                             return "END $message";
                             break;
-
+                            
                         default:
                             return "CON $message";
                             break;
                     }
-                })
-                ->run();
+                });
+
+            return $TRISTAN->run();
+            
         } catch (\Throwable $th) {
-            // throw $th;
-            eThrowable(get_class($this), $th->getMessage());
+            throw $th;
+            // eThrowable(get_class($this), $th->getMessage());
         }
     }
 
