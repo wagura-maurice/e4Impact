@@ -38,14 +38,14 @@ class UnstructuredSupplementaryServiceDataController extends Controller
     public function store(Request $request)
     {
         try {
-            
+
             $LOG = new UnstructuredSupplementaryServiceData;
 
             $LOG->sessionId = $request->sessionId;
             $LOG->phoneNumber = phoneNumberPrefix($request->phoneNumber);
             $LOG->serviceCode = $request->serviceCode;
             $LOG->networkCode = $request->networkCode;
-            $LOG->cost = $request->cost;
+            $LOG->cost = isset($request->cost) && !empty($request->cost) ? getOnlyNumbers($request->cost) : NULL;
 
             $LOG->save();
 
