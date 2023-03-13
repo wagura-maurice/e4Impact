@@ -70,7 +70,7 @@ class Create extends Action
                     $this->record->set('prompt', __('Oops! Account NOT successfully created, please try again!'));
                 }
 
-                Cache::forget($this->record->get('sessionId'));
+                Cache::forget($this->record->get('phoneNumber'));
             }
         } catch (\Throwable $th) {
             // throw $th;
