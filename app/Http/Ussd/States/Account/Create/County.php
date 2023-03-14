@@ -19,9 +19,9 @@ class County extends State
             $this->record->set('county', strtolower($county->name));
             $this->record->set('county_number', strtolower($county->code));
         }
-
+        
         $this->decision->custom(function ($input) {
-            return !empty(trim($input)) ? true : false;
+            return is_string(trim($input)) && !empty(trim($input)) ? true : false;
         }, \App\Http\Ussd\States\Account\Create\Location::class)->any(self::class);
     }
 }

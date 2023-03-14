@@ -40,16 +40,14 @@ class UnstructuredSupplementaryServiceDataController extends Controller
         try {
 
             $LOG = new UnstructuredSupplementaryServiceData;
-
             $LOG->sessionId = $request->sessionId;
             $LOG->phoneNumber = phoneNumberPrefix($request->phoneNumber);
             $LOG->serviceCode = $request->serviceCode;
             $LOG->networkCode = $request->networkCode;
             $LOG->cost = isset($request->cost) && !empty($request->cost) ? getOnlyNumbers($request->cost) : NULL;
-
             $LOG->save();
 
-            Cache::remember(phoneNumberPrefix($request->phoneNumber), 444, function () use ($request) {
+            /* Cache::remember(phoneNumberPrefix($request->phoneNumber), 444, function () use ($request) {
                 $curl = curl_init();
 
                 curl_setopt_array($curl, [
@@ -73,9 +71,9 @@ class UnstructuredSupplementaryServiceDataController extends Controller
                 }
                 
                 return optional($response)[0] ?? false;
-            });
+            }); */
 
-            $ANDREW = optional(optional(Cache::get(phoneNumberPrefix($request->phoneNumber)))->user)->username ? \App\Http\Ussd\States\Initialize::class : \App\Http\Ussd\States\Account\Create\Name::class;
+            // $ANDREW = optional(optional(Cache::get(phoneNumberPrefix($request->phoneNumber)))->user)->username ? \App\Http\Ussd\States\Initialize::class : \App\Http\Ussd\States\Account\Create\Name::class;
 
             $TRISTAN = TATE::machine()
                 ->set([
@@ -86,7 +84,7 @@ class UnstructuredSupplementaryServiceDataController extends Controller
                 ])
                 ->setInput(strpos(request('text'), '*') !== false ? substr(request('text'), strrpos(request('text'), '*') + 1) : request('text'))
                 // ->setInput(strpos($request->text, '*') !== false ? substr($request->text, strrpos($request->text, '*') + 1) : ($request->text ? $request->text : 0))
-                ->setInitialState($ANDREW)
+                ->setInitialState(\App\Http\Ussd\States\Account\Create\Name::class)
                 ->setResponse(function (string $message, string $action) {
                     switch ($action) {
                         case 'prompt':
