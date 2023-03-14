@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Sparors\Ussd\Facades\Ussd as TATE;
+use Sparors\Ussd\Facades\Ussd as SPARORS;
 use App\Models\UnstructuredSupplementaryServiceData;
 
 class UnstructuredSupplementaryServiceDataController extends Controller
@@ -40,14 +40,16 @@ class UnstructuredSupplementaryServiceDataController extends Controller
         try {
 
             $LOG = new UnstructuredSupplementaryServiceData;
+
             $LOG->sessionId = $request->sessionId;
             $LOG->phoneNumber = phoneNumberPrefix($request->phoneNumber);
             $LOG->serviceCode = $request->serviceCode;
             $LOG->networkCode = $request->networkCode;
             $LOG->cost = isset($request->cost) && !empty($request->cost) ? getOnlyNumbers($request->cost) : NULL;
+
             $LOG->save();
 
-            /* Cache::remember(phoneNumberPrefix($request->phoneNumber), 444, function () use ($request) {
+            Cache::remember(phoneNumberPrefix($request->phoneNumber), 444, function () use ($request) {
                 $curl = curl_init();
 
                 curl_setopt_array($curl, [
@@ -71,20 +73,20 @@ class UnstructuredSupplementaryServiceDataController extends Controller
                 }
                 
                 return optional($response)[0] ?? false;
-            }); */
+            });
 
-            // $ANDREW = optional(optional(Cache::get(phoneNumberPrefix($request->phoneNumber)))->user)->username ? \App\Http\Ussd\States\Initialize::class : \App\Http\Ussd\States\Account\Create\Name::class;
+            $STATE = optional(optional(Cache::get(phoneNumberPrefix($request->phoneNumber)))->user)->username ? \App\Http\Ussd\States\Initialize::class : \App\Http\Ussd\States\Account\Create\Name::class;
 
-            $TRISTAN = TATE::machine()
+            $USSD = SPARORS::machine()
                 ->set([
                     'sessionId' => $request->sessionId,
                     'phoneNumber' => phoneNumberPrefix($request->phoneNumber),
                     'networkCode' => $request->networkCode,
                     'network' => $request->serviceCode
                 ])
-                ->setInput(strpos(request('text'), '*') !== false ? substr(request('text'), strrpos(request('text'), '*') + 1) : request('text'))
-                // ->setInput(strpos($request->text, '*') !== false ? substr($request->text, strrpos($request->text, '*') + 1) : ($request->text ? $request->text : 0))
-                ->setInitialState(\App\Http\Ussd\States\Account\Create\Name::class)
+                // ->setInput(strpos(request('text'), '*') !== false ? substr(request('text'), strrpos(request('text'), '*') + 1) : request('text'))
+                ->setInput(strpos($request->text, '*') !== false ? substr($request->text, strrpos($request->text, '*') + 1) : ($request->text ? $request->text : 0))
+                ->setInitialState($STATE)
                 ->setResponse(function (string $message, string $action) {
                     switch ($action) {
                         case 'prompt':
@@ -96,13 +98,13 @@ class UnstructuredSupplementaryServiceDataController extends Controller
                             break;
                     }
                 });
-
-            return $TRISTAN->run();
             
         } catch (\Throwable $th) {
             throw $th;
             // eThrowable(get_class($this), $th->getMessage());
         }
+
+        return $USSD->run();
     }
 
     /**
