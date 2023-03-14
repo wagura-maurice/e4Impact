@@ -22,7 +22,7 @@ add('shared_dirs', []);
 add('writable_dirs', []);
 
 // Hosts
-host('198.211.20.99')
+host('197.243.22.44')
     ->user('deployer')
     ->port(5432)
     ->identityFile('~/.ssh/id_rsa') // ssh on local machine that links to the deployer on vps
