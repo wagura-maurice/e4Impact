@@ -1,0 +1,17 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/css/main/app.css": "/css/main/app.css",
+    "/css/pages/datatables.css": "/css/pages/datatables.css",
+    "/css/pages/chat.css": "/css/pages/chat.css",
+    "/css/pages/auth.css": "/css/pages/auth.css",
+    "/css/main/app-dark.css": "/css/main/app-dark.css",
+    "/css/shared/iconly.css": "/css/shared/iconly.css",
+    "/css/widgets/todo.css": "/css/widgets/todo.css",
+    "/css/widgets/chat.css": "/css/widgets/chat.css",
+    "/css/pages/summernote.css": "/css/pages/summernote.css",
+    "/css/pages/simple-datatables.css": "/css/pages/simple-datatables.css",
+    "/css/pages/form-element-select.css": "/css/pages/form-element-select.css",
+    "/css/pages/error.css": "/css/pages/error.css",
+    "/css/pages/email.css": "/css/pages/email.css",
+    "/css/pages/dripicons.css": "/css/pages/dripicons.css"
+}
