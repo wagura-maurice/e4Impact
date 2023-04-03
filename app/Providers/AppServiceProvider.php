@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\TextMessage;
 use App\Models\Transaction;
+use Laravel\Fortify\Fortify;
 use Illuminate\Support\Facades\URL;
 use App\Observers\TextMessageObserver;
 use App\Observers\TransactionObserver;
@@ -38,6 +39,11 @@ class AppServiceProvider extends ServiceProvider
 
         // App Db Schema.
         Schema::defaultStringLength(191);
+
+        // Setting the view for the two factor authentication.
+        /* Fortify::twoFactorChallengeView(function () {
+            return view('auth.two-factor-challenge');
+        }); */
 
         // App Interface to repositories biding.
         // $this->app->bind(IPNInterface::class, IPNRepository::class);
