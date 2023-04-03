@@ -11,7 +11,19 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix.sass("resources/scss/app.scss", "public/css/main")
+    .sass("resources/scss/themes/dark/app-dark.scss", "public/css/main")
+    .sass("resources/scss/pages/auth.scss", "public/css/pages")
+    .sass("resources/scss/pages/chat.scss", "public/css/pages")
+    .sass("resources/scss/pages/datatables.scss", "public/css/pages")
+    .sass("resources/scss/pages/dripicons.scss", "public/css/pages")
+    .sass("resources/scss/pages/email.scss", "public/css/pages")
+    .sass("resources/scss/pages/error.scss", "public/css/pages")
+    .sass("resources/scss/pages/form-element-select.scss", "public/css/pages")
+    .sass("resources/scss/pages/simple-datatables.scss", "public/css/pages")
+    .sass("resources/scss/pages/summernote.scss", "public/css/pages")
+    .sass("resources/scss/widgets/chat.scss", "public/css/widgets")
+    .sass("resources/scss/widgets/todo.scss", "public/css/widgets")
+    .sass("resources/scss/iconly.scss", "public/css/shared")
+    .js("resources/js/app.js", "public/js")
+    
