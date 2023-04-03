@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::view('home', 'backend.home')->name('home');
+    Route::view('account','backend.account')->name('account');
+});
