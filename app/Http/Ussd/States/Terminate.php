@@ -11,7 +11,7 @@ class Terminate extends State
         if($this->record->prompt) {
             $this->menu->text(__($this->record->prompt . ' for enquires? Call ' . getSetting('CUSTOMER_CARE_CALLER_ID')));
         } else {
-            $this->menu->text(__('thank you for using ' . config('app.name') . ' services, for enquires? Call ' . getSetting('CUSTOMER_CARE_CALLER_ID')));
+            $this->menu->text(__('thank you for using sweet yellow passion digital platform services, for enquires? Call ' . getSetting('CUSTOMER_CARE_CALLER_ID')));
         }
     }
 

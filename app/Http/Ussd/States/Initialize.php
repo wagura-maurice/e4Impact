@@ -9,7 +9,7 @@ class Initialize extends State
 {
     protected function beforeRendering(): void
     {
-        $this->menu->text(__(ucwords(greetings() . ' ' . Cache::get($this->record->get('phoneNumber'))->user->first_name . ', welcome to ' . config('app.name') . '. for enquires? Call ' . getSetting('CUSTOMER_CARE_CALLER_ID'))))
+        $this->menu->text(__(ucwords(greetings() . ' ' . Cache::get($this->record->get('phoneNumber'))->user->first_name . ', welcome to sweet yellow passion digital platform. for enquires? Call ' . getSetting('CUSTOMER_CARE_CALLER_ID'))))
             ->lineBreak(1)
             ->text(__('Select action to continue'))
             ->lineBreak(1)
