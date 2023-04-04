@@ -8,7 +8,7 @@ class Name extends State
 {
     protected function beforeRendering(): void
     {
-        $this->menu->text(__(ucwords(greetings() . ', welcome to ' . config('app.name') . '. for enquires? Call ' . getSetting('CUSTOMER_CARE_CALLER_ID'))))
+        $this->menu->text(__(ucwords(greetings() . ', welcome to sweet yellow passion digital platform. for enquires? Call ' . getSetting('CUSTOMER_CARE_CALLER_ID'))))
             ->lineBreak(1)
             ->text($this->record->get('name') ? __('Input entered is not valid! Please enter your full name to continue') : __('Please enter your full name to continue'));
     }
