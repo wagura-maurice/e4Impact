@@ -17,6 +17,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Author
+    |--------------------------------------------------------------------------
+    |
+    | This is a custom configuration that we added to the config/app.php file.
+    | It is used to display the author name and url in the footer of the application.
+    |
+    */
+
+    'author' => [
+        'name' => env('APP_AUTHOR_NAME', 'Wagura Maurice'),
+        'url' => env('APP_AUTHOR_URL', 'http://waguramaurice.com')
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |
