@@ -59,7 +59,7 @@ class Create extends Action
                 $this->record->set('prompt', __('Oops! server error encountered, please try again!'));
             } else {
                 if (optional($response)->user && $response->user->username == $data['user']['username']) {
-                    $this->record->set('prompt', __('Thank you for registering on ' . config('app.name')));
+                    $this->record->set('prompt', __('Thank you for registering on sweet yellow passion digital platform'));
 
                     /* Sending a text message to the user. */
                     \App\Jobs\TextMessage\Generate::dispatch('onboarding_notification', [
