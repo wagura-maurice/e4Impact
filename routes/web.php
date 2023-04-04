@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\PartnershipController;
-use App\Http\Controllers\ContactCategoryController;
 use App\Http\Controllers\ProjectCategoryController;
+use App\Http\Controllers\PersonnelCategoryController;
 use App\Http\Controllers\MembershipCategoryController;
 use App\Http\Controllers\PartnershipCategoryController;
 
@@ -38,8 +40,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/membership/category', MembershipCategoryController::class, ['as' => 'membership']);
     Route::resource('/membership/catalog', MembershipController::class, ['as' => 'membership']);
 
-    Route::resource('/contact/category',ContactCategoryController::class, ['as' => 'contact']);
-    Route::resource('/contact/catalog', ContactController::class, ['as' => 'contact']);
+    Route::resource('/personnel/category',PersonnelCategoryController::class, ['as' => 'personnel']);
+    Route::resource('/personnel/catalog', PersonnelController::class, ['as' => 'personnel']);
 
     Route::resource('/project/category', ProjectCategoryController::class, ['as' => 'project']);
     Route::resource('/project/catalog', ProjectController::class, ['as' => 'project']);
