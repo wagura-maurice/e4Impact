@@ -1,9 +1,9 @@
 <div x-cloak x-init="$watch('selectPage', value => selectPageUpdated(value))" x-data="{
-    propertiesInPage: @entangle('propertiesInPage'),
-    allProperties: @entangle('allProperties'),
+    projectsInPage: @entangle('projectsInPage'),
+    allProjects: @entangle('allProjects'),
     selectPage: false,
     selectAll: false,
-    selectedType: @entangle('selectedType'),
+    selectedCategory: @entangle('selectedCategory'),
     sortField: @entangle('sortField'),
     sortDirection: @entangle('sortDirection'),
     checked: [],
@@ -17,7 +17,7 @@
     },
     selectPageUpdated(value) {
         if (value) {
-            this.checked = this.propertiesInPage;
+            this.checked = this.projectsInPage;
         } else {
             this.selectAll = false;
             this.checked = [];
@@ -25,10 +25,10 @@
     },
     selectAllItems() {
         this.selectAll = true;
-        this.checked = this.allProperties;
+        this.checked = this.allProjects;
     },
-    exportProperties() {
-        $wire.emit('exportProperties', this.checked);
+    exportProjects() {
+        $wire.emit('exportProjects', this.checked);
     }
 }">
     <div class="d-flex justify-content-between align-content-center my-2">
@@ -45,20 +45,20 @@
                 </div>
             </div>
             <div class="dropdown ms-4" x-show="checked.length > 0" x-transition>
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                <button class="btn btn-secondary dropdown-toggle" category="button" id="dropdownMenuButton1"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     With selected (<span x-text="checked.length"></span>)
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li>
-                        <a href="#" class="dropdown-item" type="button"
+                        <a href="#" class="dropdown-item" category="button"
                             onclick="confirm('Are you sure you want to delete these records?') || event.stopImmediatePropagation()"
                             @click="deleteRecords">
                             <i class="bi bi-trash"></i> <i>Delete</i>
                         </a>
                     </li>
                     <li>
-                        <a href="#" @click="exportProperties" class="dropdown-item" type="button">
+                        <a href="#" @click="exportProjects" class="dropdown-item" category="button">
                             <i class="bi bi-download"></i> <i>Export</i>
                         </a>
                     </li>
@@ -67,8 +67,8 @@
         </div>
         <div class="d-flex align-items-center ml-4 input-group mb-3">
             <div class="input-group">
-                <input wire:model.debounce.500ms="search" type="search" class="form-control"
-                    placeholder="Search by _pid, name, address, or type...">
+                <input wire:model.debounce.500ms="search" category="search" class="form-control"
+                    placeholder="Search by _pid, name, address, or category...">
                 <span class="btn btn-primary" wire:click="toggleShowAdvancedFilters">
                     <i class="bi bi-chevron-compact-down"></i>
                 </span>
@@ -82,18 +82,18 @@
             <div class="row">
                 <div class="form-group col-6">
                     <div class="d-flex align-items-center ml-4 input-group mb-3 col">
-                        <label class="input-group-text" for="type">By Property Type</label>
-                        <select class="form-select" name="type_id" id="type_id" wire:model="selectedType">
-                            <option value="">All Type</option>
-                            @foreach ($types as $type)
-                                <option value="{{ $type->id }}">{{ ucwords($type->name) }}</option>
+                        <label class="input-group-text" for="category">By Project Category</label>
+                        <select class="form-select" name="category_id" id="category_id" wire:model="selectedCategory">
+                            <option value="">All Category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ ucwords($category->name) }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="form-group col-6">
                     <div class="d-flex align-items-center ml-4 input-group mb-3 col">
-                        <label class="input-group-text" for="status">By Property Status</label>
+                        <label class="input-group-text" for="status">By Project Status</label>
                         <select class="form-select" name="_status" id="_status" wire:model="selectedStatus">
                             <option value="">All Status</option>
                             @foreach ($statuses as $status)
@@ -108,9 +108,9 @@
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="date-range">By Creation Date Range</label>
                             </div>
-                            <input type="date" name="date-start" id="date-start" class="form-control"
+                            <input category="date" name="date-start" id="date-start" class="form-control"
                                 placeholder="date start" wire:model="selectedDateStart">
-                            <input type="date" name="date-end" id="date-end" class="form-control"
+                            <input category="date" name="date-end" id="date-end" class="form-control"
                                 placeholder="date end" wire:model="selectedDateEnd">
                         </div>
                     </fieldset>
@@ -137,7 +137,7 @@
         </div>
         <div x-show="selectPage && !selectAll">
             You have selected <strong x-text="checked.length"></strong> items, Do you want to Select All
-            <strong x-text="allProperties.length"></strong> items?
+            <strong x-text="allProjects.length"></strong> items?
             <a href="#" @click="selectAllItems" class="ml-2">Select All</a>
         </div>
     </div>
@@ -149,7 +149,7 @@
                     <th>
                         <div class="form-check">
                             <div class="checkbox">
-                                <input type="checkbox" class="form-check-input" x-model="selectPage">
+                                <input category="checkbox" class="form-check-input" x-model="selectPage">
                             </div>
                         </div>
                     </th>
@@ -161,12 +161,12 @@
                         </a>
                     </th>
                     <th>Name</th>
-                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Description</th>
                     <th>Telephone</th>
                     <th>Email</th>
-                    <th>Address</th>
-                    <th>Units</th>
-                    <th>Tenancies</th>
+                    <th>Logo</th>
+                    <th>Website</th>
                     <th>Created</th>
                     <th>Updated</th>
                     <th>Status</th>
@@ -174,56 +174,56 @@
                         <!-- Action -->
                     </th>
                 </tr>
-                @forelse($properties as $property)
+                @forelse($projects as $project)
                     <tr>
                         <td>
                             <div class="form-check">
                                 <div class="checkbox">
-                                    <input type="checkbox" class="form-check-input" value="{{ $property->_pid }}"
+                                    <input category="checkbox" class="form-check-input" value="{{ $project->_pid }}"
                                         x-model="checked">
                                 </div>
                             </div>
                         </td>
-                        <td scope="row"><a href="{{ route('property.building.show', $property->_pid) }}">#
-                                {{ $property->_pid }}</a></td>
-                        <td>{{ ucwords($property->name) }}</td>
-                        <td>{{ ucwords($property->type->name) }}</td>
+                        <td scope="row"><a href="{{ route('project.catalog.show', $project->_pid) }}"># {{ $project->_pid }}</a></td>
+                        <td>{{ ucwords($project->name) }}</td>
+                        <td>{{ ucwords($project->category->name) }}</td>
+                        <td>{{ ucwords($project->description) }}</td>
                         <td>
                             <a
-                                href="tel:{{ phoneNumberPrefix($property->telephone) }}">{{ phoneNumberPrefix($property->telephone) }}</a>
+                                href="tel:{{ phoneNumberPrefix($project->telephone) }}">{{ phoneNumberPrefix($project->telephone) }}</a>
                         </td>
                         <td>
-                            <a href="mailto:{{ $property->email }}">{{ $property->email }}</a>
+                            <a href="mailto:{{ $project->email }}">{{ $project->email }}</a>
+                        </td>
+                        <td class="avatar avatar-lg me-3">
+                            <img src="{{ $project->logo ?? '#' }}" alt="{{ $project->name }}" srcset="{{ $project->logo ?? '#' }}">
                         </td>
                         <td>
-                            <a href="{{ optional($property)->gps_coordinates ? generateMapLink($property->gps_coordinates, $property->address) : '#' }}"
-                                target="_blank">{{ ucwords($property->address) }}</a>
+                            <a href="{{ $project->website ?? '#' }}" target="_blank">{{ $project->website ?? '#' }}</a>
                         </td>
-                        <td>{{ number_format($property->units->count()) }}</td>
-                        <td>{{ number_format($property->tenancies->count()) }}</td>
-                        <td>{{ \Illuminate\Support\Carbon::parse($property->created_at)->diffForHumans() }}</td>
-                        <td>{{ \Illuminate\Support\Carbon::parse($property->updated_at)->diffForHumans() }}</td>
+                        <td>{{ \Illuminate\Support\Carbon::parse($project->created_at)->diffForHumans() }}</td>
+                        <td>{{ \Illuminate\Support\Carbon::parse($project->updated_at)->diffForHumans() }}</td>
                         <td>
                             <a href="#"
-                                class="btn icon icon-left btn-sm btn-light-{{ $property->_status == \App\Models\Property::PENDING ? 'info' : ($property->_status == \App\Models\Property::ACTIVE ? 'success' : 'danger') }}"><i
-                                    class="{{ $property->_status == \App\Models\Property::PENDING ? 'bi bi-info-circle' : ($property->_status == \App\Models\Property::ACTIVE ? 'bi bi-check2-circle' : 'bi bi-radioactive') }}"
+                                class="btn icon icon-left btn-sm btn-light-{{ $project->_status == \App\Models\Project::PENDING ? 'info' : ($project->_status == \App\Models\Project::ACTIVE ? 'success' : 'danger') }}"><i
+                                    class="{{ $project->_status == \App\Models\Project::PENDING ? 'bi bi-info-circle' : ($project->_status == \App\Models\Project::ACTIVE ? 'bi bi-check2-circle' : 'bi bi-radioactive') }}"
                                     style="font-size: 1.2em; color: #435ebe;"></i>
-                                <strong>{{ $property->_status == \App\Models\Property::PENDING ? 'Pending' : ($property->_status == \App\Models\Property::ACTIVE ? 'Active' : 'Inactive') }}</strong></a>
+                                <strong>{{ $project->_status == \App\Models\Project::PENDING ? 'Pending' : ($project->_status == \App\Models\Project::ACTIVE ? 'Active' : 'Inactive') }}</strong></a>
                         </td>
                         <td>
-                            <a href="{{ route('property.building.edit', $property->_pid) }}"
+                            <a href="{{ route('project.catalog.edit', $project->_pid) }}"
                                 class="btn icon icon-left btn-sm btn-light-info" title="Edit"
                                 style="font-size: 1.2em; color: #56b6f7;"><i class="bi bi-pencil-square"></i></a>
                             <a href="#" class="btn icon icon-left btn-sm btn-light-danger"
                                 onclick="confirm('Are you sure you want to delete this record?') || event.stopImmediatePropagation()"
-                                @click="deleteRecord({{ $property->id }})" title="Trash"
+                                @click="deleteRecord({{ $project->id }})" title="Trash"
                                 style="font-size: 1.2em; color: #f3616d;"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 @empty
                     <div class="col-md-12">
                         <div class="alert alert-light-info color-info">
-                            {{ __('No property buildings found. Please try again!') }}
+                            {{ __('No project found. Please try again!') }}
                         </div>
                     </div>
                 @endforelse
@@ -233,7 +233,7 @@
 
     <!-- <div class="row mt-4"> -->
     <!-- <div class="col-sm-6 offset-5"> -->
-    {{ $properties->links() }}
+    {{ $projects->links() }}
     <!-- </div> -->
     <!-- </div> -->
 </div>
