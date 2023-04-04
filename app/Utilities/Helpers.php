@@ -4,7 +4,44 @@ use App\Models\Setting;
 use App\Models\LightOfGuidance;
 use libphonenumber\PhoneNumberUtil;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 use libphonenumber\PhoneNumberFormat;
+
+if (! function_exists('checkRoute')) {
+    /**
+     * It checks if the passed route name is the current route name
+     * 
+     * @param route The route name to check.
+     * 
+     * @return bool - The function is returning a boolean value.
+     *     - The function is checking if the passed route is the current route.
+     *     - If the passed route is the current route, the function returns true.
+     *     - If the passed route is not the current route, the function returns false.
+     */
+    function checkRoute($route): bool
+    {
+        // check if passed route name is current!
+        if ($route == Route::currentRouteName()) {
+
+            // check if passed route exists on route's list
+            /* if ($route[0] === "/") {
+                $route = substr($route, 1);
+            }
+    
+            $routes = Route::getRoutes()->getRoutes();
+            
+            foreach ($routes as $r) {
+                if ($r->action['as'] == $route) {
+                    return true;
+                }
+            } */
+            
+            return true;
+        }
+
+        return false;
+    }
+}
 
 if (! function_exists('eThrowable')) {
     /**
