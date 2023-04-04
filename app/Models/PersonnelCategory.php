@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class CommunicationCategory extends Model
+class PersonnelCategory extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -20,38 +20,26 @@ class CommunicationCategory extends Model
         'name',
         'slug',
         'description',
-        'template'
+        'configuration'
     ];
 
-    /**
-     * It creates a rule for the invoice category.
-     * 
-     * @return The rules for creating a new invoice category.
-     */
     public static function createRules()
     {
         return [
             'name' => 'required|string',
-            'slug' => 'required|string|unique:communication_categories',
+            'slug' => 'required|string|unique:personnel_categories',
             'description' => 'nullable|string',
-            'template' => 'required|integer'
+            'configuration' => 'nullable|string'
         ];
     }
 
-    /**
-     * A function that is used to validate the data that is being sent to the database.
-     * 
-     * @param int id The id of the record you want to update.
-     * 
-     * @return An array of rules for the update method.
-     */
     public static function updateRules(int $id)
     {
         return [
             'name' => 'nullable|string',
-            'slug' => 'nullable|string|' . Rule::unique('communication_categories', 'slug')->ignore($id),
+            'slug' => 'nullable|string|' . Rule::unique('personnel_categories', 'slug')->ignore($id),
             'description' => 'nullable|string',
-            'template' => 'nullable|integer'
+            'configuration' => 'nullable|string'
         ];
     }
 }

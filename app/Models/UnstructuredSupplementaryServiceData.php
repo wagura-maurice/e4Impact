@@ -49,7 +49,7 @@ class UnstructuredSupplementaryServiceData extends Model
     public static function updateRules(int $id)
     {
         return [
-            'sessionId' => 'nullable|string|'.Rule::unique('unstructured_supplementary_service_data', 'sessionId')->ignore($id),
+            'sessionId' => 'nullable|string|' . Rule::unique('unstructured_supplementary_service_data', 'sessionId')->ignore($id),
             'phoneNumber' => 'nullable|string',
             'serviceCode' => 'nullable|string',
             'networkCode' => 'nullable|string',

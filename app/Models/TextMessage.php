@@ -63,12 +63,12 @@ class TextMessage extends Model
     public static function updateRules(int $id)
     {
         return [
-            '_pid' => 'nullable|string|'.Rule::unique('text_messages', '_pid')->ignore($id),
+            '_pid' => 'nullable|string|' . Rule::unique('text_messages', '_pid')->ignore($id),
             'category_id' => 'nullable|integer',
             'bulk_text_message_id' => 'nullable|integer',
             'content' => 'nullable|string',
             'telephone' => 'nullable|string',
-            'transaction_id' => 'nullable|string|'.Rule::unique('text_messages', 'transaction_id')->ignore($id),
+            'transaction_id' => 'nullable|string|' . Rule::unique('text_messages', 'transaction_id')->ignore($id),
             'transaction_amount' => 'nullable|numeric'
         ];
     }

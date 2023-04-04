@@ -46,7 +46,7 @@ class Setting extends Model
     public static function updateRules(int $id)
     {
         return [
-            'item' => 'nullable|string|'.Rule::unique('settings', 'item')->ignore($id),
+            'item' => 'nullable|string|' . Rule::unique('settings', 'item')->ignore($id),
             'default_value' => 'nullable|string',
             'current_value' => 'nullable|string'
         ];

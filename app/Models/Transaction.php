@@ -112,7 +112,7 @@ class Transaction extends Model
     public static function updateRules(int $id)
     {
         return [
-            '_pid' => 'nullable|string|'.Rule::unique('transactions', '_pid')->ignore($id),
+            '_pid' => 'nullable|string|' . Rule::unique('transactions', '_pid')->ignore($id),
             'party_a' => 'nullable|string',
             'party_b' => 'nullable|string',
             'account_reference' => 'nullable|string',
@@ -122,7 +122,7 @@ class Transaction extends Model
             'transaction_aggregator' => 'nullable|integer|',
             'transaction_id' => 'required|string',
             'transaction_amount' => 'nullable|numeric',
-            'transaction_code' => 'nullable|string|'.Rule::unique('transactions', 'transaction_code')->ignore($id),
+            'transaction_code' => 'nullable|string|' . Rule::unique('transactions', 'transaction_code')->ignore($id),
             'transaction_timestamp' => 'nullable|timestamp',
             'transaction_details' => 'nullable|string',
             '_feedback' => 'nullable|string'
