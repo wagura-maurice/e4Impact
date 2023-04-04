@@ -26,8 +26,8 @@ class ProjectCategoriesTableSeeder extends Seeder
                 'deleted_at' => NULL,
                 'description' => NULL,
                 'id' => 1,
-                'name' => 'defualt',
-                'slug' => 'defualt',
+                'name' => 'default',
+                'slug' => 'default',
                 'updated_at' => NULL,
             ),
             1 => 
