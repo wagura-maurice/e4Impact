@@ -40,9 +40,9 @@ class Seed extends Command
     {
         try {
             // logic for looping database tables though Orange hill's iseed commands.
-            Artisan::call('iseed settings,counties --force');
+            Artisan::call('iseed settings,roles,abilities,ability_role --force');
             // optional
-            Artisan::call('iseed membership_categories,partnership_categories,project_categories,personnel_categories,communication_categories --force');
+            Artisan::call('iseed counties,membership_categories,partnership_categories,project_categories,personnel_categories,communication_categories --force');
 
             return Command::SUCCESS;
         } catch (\Throwable $th) {
