@@ -59,10 +59,10 @@
                     <span>Partnerships</span>
                 </a>
             </li>
-            <li class="sidebar-item {{ checkRoute('contact.catalog.index') || checkRoute('contact.catalog.create') || checkRoute('contact.catalog.show') || checkRoute('contact.catalog.edit') ? 'active' : NULL }}">
-                <a href="{{ route('contact.catalog.index') }}" class="sidebar-link">
+            <li class="sidebar-item {{ checkRoute('personnel.catalog.index') || checkRoute('personnel.catalog.create') || checkRoute('personnel.catalog.show') || checkRoute('personnel.catalog.edit') ? 'active' : NULL }}">
+                <a href="{{ route('personnel.catalog.index') }}" class="sidebar-link">
                     <i class="bi bi-person-rolodex me-2" style="color: #048dd6;"></i>
-                    <span>Contacts</span>
+                    <span>Personnels</span>
                 </a>
             </li>
             <li class="sidebar-title">Programs</li>
@@ -73,16 +73,16 @@
                 </a>
             </li>
             <li class="sidebar-title">Support</li>
-            <li class="sidebar-item {{ checkRoute('personnel') ? 'active' : null }}">
-                <a href="{{-- route('personnel') --}}" class="sidebar-link">
-                    <i class="bi bi-person-badge me-2" style="color: #048dd6;"></i>
-                    <span>Personnel</span>
+            <li class="sidebar-item {{ checkRoute('user') ? 'active' : null }}">
+                <a href="{{-- route('user') --}}" class="sidebar-link">
+                    <i class="bi bi-people me-2" style="color: #048dd6;"></i>
+                    <span>Users</span>
                 </a>
             </li>
             <li class="sidebar-item {{ checkRoute('account') ? 'active' : null }}">
                 <a href="{{ route('account') }}" class="sidebar-link">
                     <i class="bi bi-person me-2" style="color: #048dd6;"></i>
-                    <span>My Account</span>
+                    <span>Account</span>
                 </a>
             </li>
             <li class="sidebar-item {{ checkRoute('setting') ? 'active' : null }}">
@@ -93,7 +93,7 @@
             </li>
             <li class="sidebar-item">
                 <a class="sidebar-link" href="{{ route('logout') }}"
-                    onclick="partnership.prpartnershipDefault(); document.getElementById('logout-form').submit();">
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="bi bi-box-arrow-left me-2" style="color: #048dd6;"></i>
                     <span>Sign Out</span>
                 </a>
