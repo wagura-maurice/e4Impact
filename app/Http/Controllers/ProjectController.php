@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use stdClass;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class ProjectController extends Controller
 {
@@ -14,7 +16,18 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $data             = new stdClass;
+        $data->breadcrumb = (object) [
+            'title'       => __('project description'),
+            'description' => __('It typically includes information on the purpose of the project, the tasks that will be completed, the timeline for completion, and any resources that will be needed.'),
+            'route'       => implode(' ', explode('.', Route::currentRouteName())),
+            'new'         => [
+                'route' => route('project.catalog.create'),
+                'title' => 'new project'
+            ]
+        ];
+
+        return view('backend.projects.index', compact('data'));
     }
 
     /**
