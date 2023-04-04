@@ -8,8 +8,8 @@
     <meta name="author" content="{{ ucwords(strtoupper(config('app.author.name'))) }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ strtoupper(config('app.name')) }}</title>
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @include('layouts.partials.styles')
+    @include('layouts.partials.scripts')
     <script type="text/javascript">
         var SITE_URL = "{{ config('app.url') }}";
         var CSRF_TOKEN = "{{ csrf_token() }}";
@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    @include('layouts.partials.scripts')
+    @stack('scripts')
 </body>
 
 </html>
