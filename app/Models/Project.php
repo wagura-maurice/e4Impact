@@ -6,6 +6,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Project extends Model
 {
@@ -68,5 +69,20 @@ class Project extends Model
             'subscribed_at' => 'nullable|timestamp',
             'unsubscribed_at' => 'nullable|timestamp'
         ];
+    }
+
+    public function assignPersonnel(int $personnel)
+    {
+        return $this->personnels()->sync($personnel, false);
+    }
+
+    public function unassignPersonnel(int $personnel)
+    {
+        return $this->personnels()->detach($personnel);
+    }
+
+    public function personnels(): BelongsToMany
+    {
+        return $this->belongsToMany(Personnel::class)->withTimestamps();
     }
 }
