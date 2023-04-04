@@ -8,6 +8,6 @@ pa make:model MembershipPersonnel -mrc
 
 pa make:model ProjectCategory -mrc
 pa make:model Project -mrc
-pa make:model ProjectTeam -mrc
+pa make:model ProjectPersonnel -mrc
 
-pa make:model Staff -mrc
+pa make:model Personnel -mrc
