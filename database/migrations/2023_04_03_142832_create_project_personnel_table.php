@@ -13,7 +13,7 @@ class CreateProjectPersonnelTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_personnel', function (Blueprint $table) {
+        Schema::create('personnel_project', function (Blueprint $table) {
             $table->id();
             // $table->id();
             $table->foreignId('project_id')->unsigned()->constrained('projects')->onDelete('cascade');
@@ -29,6 +29,6 @@ class CreateProjectPersonnelTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_personnel');
+        Schema::dropIfExists('personnel_project');
     }
 }
