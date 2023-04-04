@@ -42,73 +42,41 @@
             <!-- <li class="sidebar-title">Menu</li> -->
             <li class="sidebar-item {{ checkRoute('home') ? 'active' : null }}">
                 <a href="{{ route('home') }}" class="sidebar-link">
-                    <i class="bi bi-stack" style="color: #048dd6;"></i>
+                    <i class="bi bi-stack me-2" style="color: #048dd6;"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-            <li class="sidebar-title">Properties</li>
-            <li
-                class="sidebar-item {{ checkRoute('property.building.index') || checkRoute('property.building.create') || checkRoute('property.building.show') || checkRoute('property.building.edit') ? 'active' : null }}">
-                <a href="{{ route('property.building.index') }}" class="sidebar-link">
-                    <i class="bi bi-buildings-fill" style="color: #048dd6;"></i>
-                    <span>Buildings</span>
+            <li class="sidebar-title">Organization</li>
+            <li class="sidebar-item {{ checkRoute('membership.catalog.index') || checkRoute('membership.catalog.create') || checkRoute('membership.catalog.show') || checkRoute('membership.catalog.edit') ? 'active' : NULL }}">
+                <a href="{{ route('membership.catalog.index') }}" class="sidebar-link">
+                    <i class="bi bi-globe2 me-2" style="color: #048dd6;"></i>
+                    <span>Memberships</span>
                 </a>
             </li>
-            <li class="sidebar-item {{ checkRoute('unit') ? 'active' : null }}">
-                <a href="{{ route('unit') }}" class="sidebar-link">
-                    <i class="bi bi-house-door" style="color: #048dd6;"></i>
-                    <span>Units</span>
+            <li class="sidebar-item {{ checkRoute('partnership.catalog.index') || checkRoute('partnership.catalog.create') || checkRoute('partnership.catalog.show') || checkRoute('partnership.catalog.edit') ? 'active' : NULL }}">
+                <a href="{{ route('partnership.catalog.index') }}" class="sidebar-link">
+                    <i class="bi bi-card-list me-2" style="color: #048dd6;"></i>
+                    <span>Partnerships</span>
                 </a>
             </li>
-            <li class="sidebar-item {{ checkRoute('tenancy') ? 'active' : null }}">
-                <a href="{{ route('tenancy') }}" class="sidebar-link">
-                    <i class="bi bi-person-rolodex" style="color: #048dd6;"></i>
-                    <span>Tenancies</span>
+            <li class="sidebar-item {{ checkRoute('contact.catalog.index') || checkRoute('contact.catalog.create') || checkRoute('contact.catalog.show') || checkRoute('contact.catalog.edit') ? 'active' : NULL }}">
+                <a href="{{ route('contact.catalog.index') }}" class="sidebar-link">
+                    <i class="bi bi-person-rolodex me-2" style="color: #048dd6;"></i>
+                    <span>Contacts</span>
                 </a>
             </li>
-            <li class="sidebar-title">Collections</li>
-            <li class="sidebar-item {{ checkRoute('receipt') ? 'active' : null }}">
-                <a href="{{ route('receipt') }}" class="sidebar-link">
-                    <i class="bi bi-receipt" style="color: #048dd6;"></i>
-                    <span>Receipt</span>
-                </a>
-            </li>
-            <li class="sidebar-item {{ checkRoute('invoice') ? 'active' : null }}">
-                <a href="{{ route('invoice') }}" class="sidebar-link">
-                    <i class="bi bi-wallet" style="color: #048dd6;"></i>
-                    <span>Invoice</span>
-                </a>
-            </li>
-            <li class="sidebar-item {{ checkRoute('transaction') ? 'active' : null }}">
-                <a href="{{ route('transaction') }}" class="sidebar-link">
-                    <i class="bi bi-bank" style="color: #048dd6;"></i>
-                    <span>Transaction</span>
-                </a>
-            </li>
-            <li class="sidebar-title">Management</li>
-            <li class="sidebar-item {{ checkRoute('passcode') ? 'active' : null }}">
-                <a href="{{ route('passcode') }}" class="sidebar-link">
-                    <i class="bi bi-sign-turn-right" style="color: #048dd6;"></i>
-                    <span>Authorization</span>
-                </a>
-            </li>
-            <li class="sidebar-item {{ checkRoute('issue') ? 'active' : null }}">
-                <a href="{{ route('issue') }}" class="sidebar-link">
-                    <i class="bi bi-rss" style="color: #048dd6;"></i>
-                    <span>Feedback</span>
-                </a>
-            </li>
-            <li class="sidebar-item {{ checkRoute('water') ? 'active' : null }}">
-                <a href="{{ route('water') }}" class="sidebar-link">
-                    <i class="bi bi-thermometer-half" style="color: #048dd6;"></i>
-                    <span>Water</span>
+            <li class="sidebar-title">Programs</li>
+            <li class="sidebar-item {{ checkRoute('project.catalog.index') || checkRoute('project.catalog.create') || checkRoute('project.catalog.show') || checkRoute('project.catalog.edit') ? 'active' : NULL }}">
+                <a href="{{ route('project.catalog.index') }}" class="sidebar-link">
+                    <i class="bi bi-folder me-2" style="color: #048dd6;"></i>
+                    <span>Projects</span>
                 </a>
             </li>
             <li class="sidebar-title">Support</li>
-            <li class="sidebar-item {{ checkRoute('transaction') ? 'active' : null }}">
-                <a href="{{-- route('transaction') --}}" class="sidebar-link">
-                    <i class="bi bi-person-badge" style="color: #048dd6;"></i>
-                    <span>Profiles</span>
+            <li class="sidebar-item {{ checkRoute('personnel') ? 'active' : null }}">
+                <a href="{{-- route('personnel') --}}" class="sidebar-link">
+                    <i class="bi bi-person-badge me-2" style="color: #048dd6;"></i>
+                    <span>Personnel</span>
                 </a>
             </li>
             <li class="sidebar-item {{ checkRoute('account') ? 'active' : null }}">
@@ -125,8 +93,8 @@
             </li>
             <li class="sidebar-item">
                 <a class="sidebar-link" href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="bi bi-box-arrow-left" style="color: #048dd6;"></i>
+                    onclick="partnership.prpartnershipDefault(); document.getElementById('logout-form').submit();">
+                    <i class="bi bi-box-arrow-left me-2" style="color: #048dd6;"></i>
                     <span>Sign Out</span>
                 </a>
             </li>
