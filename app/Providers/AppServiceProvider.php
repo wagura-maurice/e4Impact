@@ -50,7 +50,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(LNMOInterface::class, LNMORepository::class);
 
         // App Observers.
-        Transaction::observe(TransactionObserver::class);
-        TextMessage::observe(TextMessageObserver::class);
+        // Transaction::observe(TransactionObserver::class);
+        // TextMessage::observe(TextMessageObserver::class);
     }
 }
