@@ -118,7 +118,7 @@ if (! function_exists('generatePID')) {
     {
         $latest = $model::latest()->first();
         
-        $_PID = str_pad(optional($latest)->id + 1, $length, "0", STR_PAD_LEFT);
+        $_PID = str_pad((optional($latest)->id ?? 0) + 1, $length, "0", STR_PAD_LEFT);
 
         return strtoupper($_PID);
     };
@@ -266,6 +266,18 @@ if (! function_exists('arrayKeyWalk')) {
         });
 
         return $item;
+    }
+}
+
+if (! function_exists('getNameParts')) {
+    function getNameParts(string $name): array {
+        $name_parts = explode(' ', $name);
+
+        return array_filter([
+            'first_name' => $name_parts[0] ?? NULL,
+            'middle_name' => array_pop($name_parts) ?? NULL,
+            'last_name' => implode(' ', $name_parts) ?? NULL
+        ]);
     }
 }
 
