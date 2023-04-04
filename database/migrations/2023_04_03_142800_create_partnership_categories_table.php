@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommunicationCategoriesTable extends Migration
+class CreatePartnershipCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateCommunicationCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('communication_categories', function (Blueprint $table) {
+        Schema::create('partnership_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('slug')->nullable()->unique();
             $table->text('description')->nullable();
-            $table->text('template');
             $table->json('configuration')->nullable();
             $table->softDeletes();
             $table->timestamps();
@@ -32,6 +31,6 @@ class CreateCommunicationCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('communication_categories');
+        Schema::dropIfExists('partnership_categories');
     }
 }
