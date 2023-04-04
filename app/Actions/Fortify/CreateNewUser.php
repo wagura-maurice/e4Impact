@@ -41,20 +41,18 @@ class CreateNewUser implements CreatesNewUsers
 
         $user->assignRole('guest');
 
-        $profile = Profile::create(array_filter([
+        Profile::create(array_filter(array_merge(getNameParts($input['name']), [
+            '_pid' => generatePID(Profile::class),
             'user_id' => $user->id,
             'telephone' => NULL,
             'national_id' => NULL,
-            'first_name' => explode(' ', $input['name'])[0],
-            'middle_name' => explode(' ', $input['name'])[2] ? explode(' ', $input['name'])[1] : NULL,
-            'last_name' => (explode(' ', $input['name'])[2] ?? explode(' ', $input['name'])[1]) ?? NULL,
             'gender' => NULL,
             'address_line_1' => NULL,
             'address_line_2' => NULL,
             'city' => NULL,
             'state' => NULL,
             'country' => NULL
-        ]));
+        ])));
 
         return $user;
     }
