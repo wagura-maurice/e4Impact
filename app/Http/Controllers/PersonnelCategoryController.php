@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PartnershipPersonnel;
+use App\Models\PersonnelCategory;
 use Illuminate\Http\Request;
 
-class PartnershipPersonnelController extends Controller
+class PersonnelCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class PartnershipPersonnelController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PartnershipPersonnel  $partnershipPersonnel
+     * @param  \App\Models\PersonnelCategory  $personnelCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(PartnershipPersonnel $partnershipPersonnel)
+    public function show(PersonnelCategory $personnelCategory)
     {
         //
     }
@@ -52,10 +52,10 @@ class PartnershipPersonnelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PartnershipPersonnel  $partnershipPersonnel
+     * @param  \App\Models\PersonnelCategory  $personnelCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(PartnershipPersonnel $partnershipPersonnel)
+    public function edit(PersonnelCategory $personnelCategory)
     {
         //
     }
@@ -64,10 +64,10 @@ class PartnershipPersonnelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PartnershipPersonnel  $partnershipPersonnel
+     * @param  \App\Models\PersonnelCategory  $personnelCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PartnershipPersonnel $partnershipPersonnel)
+    public function update(Request $request, PersonnelCategory $personnelCategory)
     {
         //
     }
@@ -75,10 +75,10 @@ class PartnershipPersonnelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PartnershipPersonnel  $partnershipPersonnel
+     * @param  \App\Models\PersonnelCategory  $personnelCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PartnershipPersonnel $partnershipPersonnel)
+    public function destroy(PersonnelCategory $personnelCategory)
     {
         //
     }
