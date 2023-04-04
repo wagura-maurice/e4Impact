@@ -85,4 +85,9 @@ class Project extends Model
     {
         return $this->belongsToMany(Personnel::class)->withTimestamps();
     }
+
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(ProjectCategory::class);
+    }
 }
