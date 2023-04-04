@@ -3,9 +3,11 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use App\Models\Profile;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class CreateNewUser implements CreatesNewUsers
@@ -31,10 +33,29 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return User::create([
-            'name' => $input['name'],
+        $user = User::create([
+            'name' => Str::snake(strtolower($input['name'])),
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
+
+        $user->assignRole('guest');
+
+        $profile = Profile::create(array_filter([
+            'user_id' => $user->id,
+            'telephone' => NULL,
+            'national_id' => NULL,
+            'first_name' => explode(' ', $input['name'])[0],
+            'middle_name' => explode(' ', $input['name'])[2] ? explode(' ', $input['name'])[1] : NULL,
+            'last_name' => (explode(' ', $input['name'])[2] ?? explode(' ', $input['name'])[1]) ?? NULL,
+            'gender' => NULL,
+            'address_line_1' => NULL,
+            'address_line_2' => NULL,
+            'city' => NULL,
+            'state' => NULL,
+            'country' => NULL
+        ]));
+
+        return $user;
     }
 }
